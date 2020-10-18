@@ -41,8 +41,9 @@ function notAuthorized(){
   function logIn(event){
     //отменяем стандартное поведение браузера - перезагрузка страницы при нажатии на submit
     event.preventDefault();
-    console.log('Логин')
-    console.log(loginInput.value); //получили содержимое поля login
+    login = loginInput.value; //записали в переменную содержимое поля login
+    toggleModalAuth();  //после авторизации закрываем окно
+    checkAuth(); //проверяем авторизирован или нет
 
   }
   buttonAuth.addEventListener('click', toggleModalAuth); //слушатель события клик
@@ -51,10 +52,14 @@ function notAuthorized(){
 
 }
 
-//если логин не заполнен, то notAuthorized
-if(login){     //если есть что-то в строке то true- общее правило
-  authorized();
-}else {
-  notAuthorized();
+//проверка авторизации
+function checkAuth(){
+  //если логин не заполнен, то notAuthorized
+  if(login){     //если есть что-то в строке то true- общее правило
+    authorized();
+  }else {
+    notAuthorized();
+  }
 }
-
+//нужно единожды вызвать чтобы при загрузке страницы прошла первая проверка
+checkAuth();
