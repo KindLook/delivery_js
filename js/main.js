@@ -29,7 +29,8 @@ let login = localStorage.getItem('gloDelivery');  //переменная для 
 
 //Пишем функцию на модальное окно+
 function toggleModalAuth(){
-  modalAuth.classList.toggle('is-open')
+  modalAuth.classList.toggle('is-open');
+  loginInput.style.borderColor = ''; //цвет рамки по умолчанию
 }
 
 
@@ -66,16 +67,22 @@ function notAuthorized(){
   function logIn(event){
     //отменяем стандартное поведение браузера - перезагрузка страницы при нажатии на submit
     event.preventDefault();
-    login = loginInput.value; //записали в переменную содержимое поля login
-    //локальное хранилище в браузере. добавляет свойства со значением
-    localStorage.setItem('gloDelivery', login); //ключ- значение
 
-    toggleModalAuth();  //после авторизации закрываем окно
-    buttonAuth.removeEventListener('click', toggleModalAuth); //удаляем слушатель события клик
-    closeAuth.removeEventListener('click', toggleModalAuth);  //удаляем кнопка закрытия модального окна
-    logInForm.removeEventListener('submit', logIn);  //удаляем Отправка с функцией logIn
-    logInForm.reset();  //очищаем поля ввода
-    checkAuth(); //проверяем авторизирован или нет
+    if (loginInput.value){
+      login = loginInput.value; //записали в переменную содержимое поля login
+      //локальное хранилище в браузере. добавляет свойства со значением
+      localStorage.setItem('gloDelivery', login); //ключ- значение
+      toggleModalAuth();  //после авторизации закрываем окно
+      buttonAuth.removeEventListener('click', toggleModalAuth); //удаляем слушатель события клик
+      closeAuth.removeEventListener('click', toggleModalAuth);  //удаляем кнопка закрытия модального окна
+      logInForm.removeEventListener('submit', logIn);  //удаляем Отправка с функцией logIn
+      logInForm.reset();  //очищаем поля ввода
+      checkAuth(); //проверяем авторизирован или нет
+    }else{
+      loginInput.style.borderColor = 'red';
+    }
+
+
 
   }
   buttonAuth.addEventListener('click', toggleModalAuth); //слушатель события клик
