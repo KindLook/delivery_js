@@ -43,6 +43,7 @@ function authorized(){
     buttonAuth.style.display = '';  //если авторизован, то ВОЙТИ убирается
     userName.style.display = '';  //появляется (span - inline)
     buttonOut.style.display = ''; //появляется
+    buttonOut.removeEventListener('click', logOut);  //удаляем событие
     checkAuth();
   }
 
@@ -66,6 +67,10 @@ function notAuthorized(){
     event.preventDefault();
     login = loginInput.value; //записали в переменную содержимое поля login
     toggleModalAuth();  //после авторизации закрываем окно
+    buttonAuth.removeEventListener('click', toggleModalAuth); //удаляем слушатель события клик
+    closeAuth.removeEventListener('click', toggleModalAuth);  //удаляем кнопка закрытия модального окна
+    logInForm.removeEventListener('submit', logIn);  //удаляем Отправка с функцией logIn
+    logInForm.reset();  //очищаем поля ввода
     checkAuth(); //проверяем авторизирован или нет
 
   }
