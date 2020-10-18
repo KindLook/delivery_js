@@ -17,11 +17,11 @@ function toggleModal() {
 //day1
 //авторизация без бэкенда)))
 //1. получаем кнопку Войти  и модальное окно через DOM
-const buttonAuth = document.querySelector('.button-auth');
-const modalAuth = document.querySelector('.modal-auth');
-const closeAuth = document.querySelector('.close-auth');
-const logInForm = document.querySelector('#logInForm');
-const loginInput = document.querySelector("#login");
+const buttonAuth = document.querySelector('.button-auth'); //Войти
+const modalAuth = document.querySelector('.modal-auth');  //модальное
+const closeAuth = document.querySelector('.close-auth'); //закрыть модальное
+const logInForm = document.querySelector('#logInForm');  //форма
+const loginInput = document.querySelector("#login");   //поле ввода логина
 
 //Пишем функцию на модальное окно+
 function toggleModalAuth(){
@@ -32,6 +32,7 @@ function toggleModalAuth(){
 // 2 функции когда авторизован и не авторизован
 function authorized(){
   console.log('Авторизован')
+  buttonAuth.style.display = 'none';  //если авторизован, то ВОЙТИ убирается
 }
 //если не авторизован то должна быть кнопка Войти
 function notAuthorized(){
