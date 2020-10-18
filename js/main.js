@@ -22,6 +22,9 @@ const modalAuth = document.querySelector('.modal-auth');  //модальное
 const closeAuth = document.querySelector('.close-auth'); //закрыть модальное
 const logInForm = document.querySelector('#logInForm');  //форма
 const loginInput = document.querySelector("#login");   //поле ввода логина
+const userName = document.querySelector(".user-name");   //поле ввода логина
+const buttonOut = document.querySelector(".button-out");   //поле ввода логина
+
 
 //Пишем функцию на модальное окно+
 function toggleModalAuth(){
@@ -31,8 +34,27 @@ function toggleModalAuth(){
 
 // 2 функции когда авторизован и не авторизован
 function authorized(){
+
+  //функция для кнопки Выйти
+  function logOut(){
+    login = '';
+
+//скроем все кнопки
+    buttonAuth.style.display = '';  //если авторизован, то ВОЙТИ убирается
+    userName.style.display = '';  //появляется (span - inline)
+    buttonOut.style.display = ''; //появляется
+    checkAuth();
+  }
+
   console.log('Авторизован')
+
+  userName.textContent = login;
+
   buttonAuth.style.display = 'none';  //если авторизован, то ВОЙТИ убирается
+  userName.style.display = 'inline';  //появляется (span - inline)
+  buttonOut.style.display = 'block'; //появляется
+
+  buttonOut.addEventListener('click', logOut);
 }
 //если не авторизован то должна быть кнопка Войти
 function notAuthorized(){
