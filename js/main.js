@@ -5,7 +5,7 @@ const close = document.querySelector(".close");
 
 
 
-let login = '';  //переменная для функции if авторизации
+
 
 cartButton.addEventListener("click", toggleModal);
 close.addEventListener("click", toggleModal);
@@ -25,6 +25,7 @@ const loginInput = document.querySelector("#login");   //поле ввода л�
 const userName = document.querySelector(".user-name");   //поле ввода логина
 const buttonOut = document.querySelector(".button-out");   //поле ввода логина
 
+let login = localStorage.getItem('gloDelivery');  //переменная для функции if авторизации
 
 //Пишем функцию на модальное окно+
 function toggleModalAuth(){
@@ -37,8 +38,8 @@ function authorized(){
 
   //функция для кнопки Выйти
   function logOut(){
-    login = '';
-
+    login = null;
+localStorage.removeItem('gloDelivery');
 //скроем все кнопки
     buttonAuth.style.display = '';  //если авторизован, то ВОЙТИ убирается
     userName.style.display = '';  //появляется (span - inline)
@@ -66,6 +67,9 @@ function notAuthorized(){
     //отменяем стандартное поведение браузера - перезагрузка страницы при нажатии на submit
     event.preventDefault();
     login = loginInput.value; //записали в переменную содержимое поля login
+    //локальное хранилище в браузере. добавляет свойства со значением
+    localStorage.setItem('gloDelivery', login); //ключ- значение
+
     toggleModalAuth();  //после авторизации закрываем окно
     buttonAuth.removeEventListener('click', toggleModalAuth); //удаляем слушатель события клик
     closeAuth.removeEventListener('click', toggleModalAuth);  //удаляем кнопка закрытия модального окна
