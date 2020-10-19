@@ -53,6 +53,10 @@ function authorized() {
 
     buttonOut.addEventListener('click', logOut);
 }
+function maskInput(string){
+  return !!string.trim();  //здесь можно писать множество параметров для логина
+}
+
 
 //если не авторизован то должна быть кнопка Войти
 function notAuthorized() {
@@ -63,7 +67,7 @@ function notAuthorized() {
         //отменяем стандартное поведение браузера - перезагрузка страницы при нажатии на submit
         event.preventDefault();
 
-        if (loginInput.value.trim()) {
+        if (maskInput(loginInput.value)) {
             login = loginInput.value; //записали в переменную содержимое поля login
             //локальное хранилище в браузере. добавляет свойства со значением
             localStorage.setItem('gloDelivery', login); //ключ- значение
