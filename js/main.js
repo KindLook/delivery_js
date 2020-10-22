@@ -20,6 +20,8 @@ const logInForm = document.querySelector('#logInForm');  //форма
 const loginInput = document.querySelector("#login");   //поле ввода логина
 const userName = document.querySelector(".user-name");   //поле ввода логина
 const buttonOut = document.querySelector(".button-out");   //поле ввода логина
+const cardsRestaurants = document.querySelector(".cards-restaurants");   //карточки ресторанов обертка
+console.log(cardsRestaurants);
 
 let login = localStorage.getItem('gloDelivery');  //переменная для функции if авторизации
 
@@ -45,6 +47,7 @@ function authorized() {
         buttonOut.removeEventListener('click', logOut);  //удаляем событие
         checkAuth();
     }
+
     userName.textContent = login;
 
     buttonAuth.style.display = 'none';  //если авторизован, то ВОЙТИ убирается
@@ -53,8 +56,9 @@ function authorized() {
 
     buttonOut.addEventListener('click', logOut);
 }
-function maskInput(string){
-  return !!string.trim();  //здесь можно писать множество параметров для логина
+
+function maskInput(string) {
+    return !!string.trim();  //здесь можно писать множество параметров для логина
 }
 
 
@@ -102,3 +106,35 @@ function checkAuth() {
 
 //нужно единожды вызвать чтобы при загрузке страницы прошла первая проверка
 checkAuth();
+_______________________________
+//Day2 карточки ресторана
+
+//формируем карточки ресторанов
+function createCardRestorant() {
+    //верстку вставляем в переменную с тикетами - обратные кавычки
+    const card = `            
+            <a class="card card-restaurant">
+                    <img src="img/tanuki/preview.jpg" alt="image" class="card-image"/>
+                    <div class="card-text">
+                        <div class="card-heading">
+                            <h3 class="card-title">Тануки</h3>
+                            <span class="card-tag tag">60 мин</span>
+                        </div>
+                        <div class="card-info">
+                            <div class="rating">
+                                4.5
+                            </div>
+                            <div class="price">От 1 200 ₽</div>
+                            <div class="category">Суши, роллы</div>
+                        </div>
+                    </div>
+                </a>
+                `;
+
+    //вставляем в обертку - 4 варианта
+    cardsRestaurants.insertAdjacentHTML('afterend', card);
+}
+
+createCardRestorant();
+createCardRestorant();
+createCardRestorant();
